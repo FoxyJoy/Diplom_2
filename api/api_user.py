@@ -25,9 +25,9 @@ class UserAPI:
 
     @staticmethod
     @allure.step("Удаление пользователя")
-    def delete_user():
+    def delete_user(email, password):
         # Логинися, чтоб получить токен
-        login_response = UserAPI.main_url.login_user(email=email, password= password)
+        login_response = UserAPI.login_user(email, password)
         if login_response.status_code != 200:
             raise Exception("Не удалось войти для удаления пользователя")
 

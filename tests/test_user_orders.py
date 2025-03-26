@@ -11,8 +11,12 @@ class TestUserOrders:
     def test_get_orders_authorized(self):
         token = "valid_token"
         headers = {"Authorization": token}
-        response = OrderAPI.get_user_orders(headers=headers)
+        response = OrderAPI.get_user_orders_ingredients(ingredients=locators.ingredients_in_order, headers=headers)
+        response_data = response.json()
         assert response.status_code == 200
+        assert response.json().get("success") is True
+        assert "order" in response_data  # Проверяем наличие ключа order в ответе
+        assert isinstance(response_data["order"], dict)  # Проверяем тип данных order
 
     @allure.title("Создание заказа без авторизации")
     def test_get_orders_unauthorized(self):
@@ -51,6 +55,19 @@ class TestUserOrders:
         headers = {"Authorization": token}
         response = OrderAPI.get_user_orders_ingredients(ingredients=locators.ingredients_in_order, headers=headers)
         assert response.status_code == 200
-        assert "order" in response.json()  # Проверяем, что ответ содержит данные о заказе
+        assert "order" in response.json()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

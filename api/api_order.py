@@ -7,8 +7,6 @@ class OrderAPI:
     @staticmethod
     @allure.step("Создание заказа")
     def create_order(headers=None, ingredients=None):
-        # param headers: Заголовки запроса (например, токен авторизации).
-        # param ingredients: Список ингредиентов.
         url = f"{OrderAPI.main_url}/auth/orders"
         data = {"ingredients": ingredients} if ingredients else {}
         return requests.post(url, headers=headers, json=data)
